@@ -9,6 +9,10 @@
 ## docker build
 ```bash
 docker build -t <imageName> .
+
+or with gradle docker plugin
+./gradlew buildDocker
+
 ```
 ## run with docker
 ```bash
