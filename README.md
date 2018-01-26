@@ -18,3 +18,8 @@ or with gradle docker plugin
 ```bash
 docker run -d -p 5050:5050 <imageName>
 ```
+
+## with nexus maven deply
+```bash
+./gradlew build uploadArchives 
+```
