@@ -19,7 +19,7 @@ or with gradle docker plugin
 docker run -d -p 5050:5050 <imageName>
 ```
 
-## with nexus maven deply
+## with nexus maven deploy
 ```bash
 ./gradlew build uploadArchives 
 ```
