@@ -7,11 +7,25 @@ buildscript {
     classpath('se.transmode.gradle:gradle-docker:1.2')
   }
 }
+project.group="com.dalong"
+version="1.0-SNAPSHOT"
 apply plugin: "io.ratpack.ratpack-java"
 apply plugin: "idea"
 apply plugin: "docker"
+apply plugin: "maven"
 repositories {
   jcenter()
+}
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: "http://nexushost:8081/nexus/content/repositories/snapshots") {
+            authentication(userName: "username", password: "userpassword")
+            project.group="com.dalong"
+            version="1.0-SNAPSHOT"
+            pom.groupId = "com.dalong"
+            pom.artifactId = "mydemo-ratpack"
+        }
+    }
 }
 distZip {
     archiveName = 'ratpackdemo-1-1.zip'
@@ -20,9 +34,9 @@ dependencies {
   runtime "org.slf4j:slf4j-simple:1.7.25"
 }
 task buildDocker(type:Docker,dependsOn: build){
-  push = true
+  push = false
 	applicationName = distZip.archiveName
-	project.group="dockerimage/mydemo"
+	project.group="dockerimagehost/mydemo"
 	dockerfile = file("${projectDir}/src/main/docker/Dockerfile")
   doFirst {
 		copy {
